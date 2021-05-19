@@ -1,13 +1,5 @@
 # timestamp-stopwatch
 
-## Installation
-
-	git clone https://github.com/fredrik01/ts.git ~/.ts
-
-Add this to your .zshrc or .bashrc
-
-	path+=~/.ts
-
 ## Usage
 
 	# Add entry
@@ -26,3 +18,15 @@ Add this to your .zshrc or .bashrc
 	2021-05-19 20:10:00	00:01:44	00:01:44
 	2021-05-19 20:10:20	00:00:20	00:02:04
 	Now			00:00:10	00:02:14
+
+## Installation
+
+	git clone https://github.com/fredrik01/ts.git ~/.ts
+
+Add this to your .zshrc or .bashrc
+
+	path+=~/.ts
+
+## Update
+
+	cd ~/.ts && git pull
