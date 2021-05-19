@@ -6,4 +6,4 @@
 
 Add this to your .zshrc or .bashrc
 
-	path+=.ts
+	path+=~/.ts
