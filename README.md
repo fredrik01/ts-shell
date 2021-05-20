@@ -1,20 +1,25 @@
 # timestamp-stopwatch
 
+Push timestamps to lists (stopwatches). Show time between each timestamp and time between each timestamp and the first one.
+
+Made to keep track of:
+- How long it takes before my baby falls asleep during walks
+- How long he sleeps
+- How long we are out and about
+
 ## Usage
 
-	# Add timestamp to default or named stopwatch
+Add timestamp to default or named stopwatch
+
 	ts push
-	ts push coffee
+	ts push baby
 
-	# List timestamps
+Show timestamps and time between them
+
 	ts show
-	ts show coffee
+	ts show baby
 
-	# Reset
-	ts reset
-	ts reset coffee
-
-`ts show` example output:
+	# Example output:
 
 	Timestamp		Since prev	Since first
 	2021-05-19 20:08:16		
@@ -23,7 +28,13 @@
 	2021-05-19 20:18:39	00:08:19	00:10:23
 	Now			00:00:15	00:10:38
 
-	# List stopwatches
+Reset
+
+	ts reset
+	ts reset baby
+
+List stopwatches
+
 	ts list
 
 ## Installation
