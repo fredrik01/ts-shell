@@ -30,7 +30,8 @@ function _formatDate {
 logFile="$HOME/.ts/.timestamps"
 
 function push {
-	date +%s >> "$logFile"
+  date +%s >> "$logFile"
+  echo "Timestamp saved"
 }
 
 function list {
