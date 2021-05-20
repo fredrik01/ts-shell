@@ -25,18 +25,27 @@ function _formatDate {
   fi
 }
 
+function _logFile {
+  suffix=${1:-default}
+  if [ "$suffix" != '' ]; then
+    suffix="-$suffix"
+  fi
+  echo "$HOME/.ts/.timestamps$suffix"
+}
+
 # --------------------------------------------------------------
 
-logFile="$HOME/.ts/.timestamps"
-
+# Add timestamp
 function push {
-  date +%s >> "$logFile"
+  date +%s >> "$(_logFile "$1")"
   echo "Timestamp saved"
 }
 
-function list {
+# Show timestamps for a stopwatch
+function show {
+  logFile="$(_logFile "$1")"
   if [ ! -f "$logFile" ]; then
-    echo "No timer started"
+    echo "No timestamps found"
     exit 0
   fi
 
@@ -45,8 +54,6 @@ function list {
   first=''
   prev=''
   while read timestamp; do
-
-    # dateAndTime=$(date -d@"$timestamp" +'%Y-%m-%d %H:%M:%S')
     dateAndTime=$(_formatDate "$timestamp" '%Y-%m-%d %H:%M:%S')
     diffSinceFirst=''
     diffSincePrev=''
@@ -73,7 +80,9 @@ function list {
   echo -e "Now\t\t\t$sinceLastPush\t$sinceFirstPush"
 }
 
+# Delete timestamp file
 function reset {
+  logFile="$(_logFile "$1")"
   read -p "Reset timer? " -n 1 -r
   echo # Move to a new line
   if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -84,6 +93,15 @@ function reset {
   else
     echo "Aborted"
   fi
+}
+
+# List stopwatches
+function list {
+  for n in "$HOME"/.ts/.timestamps-*; do
+    path=$(printf '%s\n' "$n")
+    # Get part after ".timestamps-"
+    sed -e 's#.*timestamps-\(\)#\1#' <<< "$path"
+  done
 }
 
 function _help {
