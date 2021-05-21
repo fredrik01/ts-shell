@@ -45,6 +45,10 @@ Add this to your `.zshrc` or `.bashrc`
 
 	PATH+=~/.ts
 
+For Termux skip the path thing and do this instead
+
+	ln -s $HOME/.ts/ts $PREFIX/bin/ts
+
 ## Update
 
 	cd ~/.ts && git pull
