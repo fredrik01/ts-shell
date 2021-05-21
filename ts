@@ -115,6 +115,11 @@ function list {
   done
 }
 
+# Just cat the log file
+function raw {
+  cat "$(_logFile "$1")"
+}
+
 function _help {
   printf "%s <task> [args]\n\nCommands:\n" "${0}"
   compgen -A function | grep -v "^_" | cat -n

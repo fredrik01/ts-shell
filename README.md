@@ -37,6 +37,11 @@ List stopwatches
 
 	ts list
 
+Cat log file
+
+	ts raw
+	ts raw baby
+
 ## Installation
 
 	git clone --depth 1 https://github.com/fredrik01/ts.git ~/.ts
