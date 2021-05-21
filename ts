@@ -15,13 +15,19 @@ function _os {
   echo "${machine}"
 }
 
-function _formatDate {
+function _fromTimestamp {
   if [ "$(_os)" == 'Mac' ]; then
-    # Mac
     date -r "$1" -u +"$2"
   else
-    # Linux
     date -d@"$1" -u +"$2"
+  fi
+}
+
+function _toTimestamp {
+  if [ "$(_os)" == 'Mac' ]; then
+    date -j -f "$2" "$1" "+%s"
+  else
+    date -d "$1" +%s
   fi
 }
 
@@ -35,10 +41,13 @@ function _logFile {
 
 # --------------------------------------------------------------
 
-# Add timestamp
+# Save timestamp
 function push {
-  date +%s >> "$(_logFile "$1")"
+  # date +%s >> "$(_logFile "$1")"
+  time=$(date -u +"%Y-%m-%d %H:%M:%S")
+  echo "$time" >> "$(_logFile "$1")"
   echo "Timestamp saved"
+  echo "$time"
 }
 
 # Show timestamps for a stopwatch
@@ -53,19 +62,21 @@ function show {
 
   first=''
   prev=''
-  while read timestamp; do
-    dateAndTime=$(_formatDate "$timestamp" '%Y-%m-%d %H:%M:%S')
+  while read dateAndTime; do
+    # dateAndTime=$(_fromTimestamp "$timestamp" '%Y-%m-%d %H:%M:%S')
+    timestamp=$(_toTimestamp "$dateAndTime" '%Y-%m-%d %H:%M:%S')
+    # dateAndTime=$timestamp
     diffSinceFirst=''
     diffSincePrev=''
 
     if [ "$first" == '' ]; then
       first=$timestamp
     else
-      diffSinceFirst=$(_formatDate $((timestamp - first)) "%H:%M:%S")
+      diffSinceFirst=$(_fromTimestamp $((timestamp - first)) "%H:%M:%S")
     fi
 
     if [ "$prev" != '' ]; then
-      diffSincePrev=$(_formatDate $((timestamp - prev)) "%H:%M:%S")
+      diffSincePrev=$(_fromTimestamp $((timestamp - prev)) "%H:%M:%S")
     fi 
 
     echo -e "$dateAndTime\t$diffSincePrev\t$diffSinceFirst"
@@ -74,9 +85,11 @@ function show {
 
   done <"$logFile"
 
-  now="$(date +%s)"
-  sinceLastPush=$(_formatDate $((now-prev)) "%H:%M:%S")
-  sinceFirstPush=$(_formatDate $((now-first)) "%H:%M:%S")
+  nowDateTime=$(date -u +"%Y-%m-%d %H:%M:%S")
+  now=$(_toTimestamp "$nowDateTime" "%Y-%m-%d %H:%M:%S")
+
+  sinceLastPush=$(_fromTimestamp $((now-prev)) "%H:%M:%S")
+  sinceFirstPush=$(_fromTimestamp $((now-first)) "%H:%M:%S")
   echo -e "Now\t\t\t$sinceLastPush\t$sinceFirstPush"
 }
 
