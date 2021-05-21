@@ -19,7 +19,7 @@ function _fromTimestamp {
   if [ "$(_os)" == 'Mac' ]; then
     date -r "$1" -u +"$2"
   else
-    date -d@"$1" +"$2"
+    date -d@"$1" -u +"$2"
   fi
 }
 
