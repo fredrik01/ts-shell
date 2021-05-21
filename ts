@@ -82,7 +82,10 @@ function show {
 
   done <"$logFile"
 
-  now=$(date +%s)
+  # now=$(date +%s)
+  nowDateTime=$(date +"%Y-%m-%d %H:%M:%S")
+  now=$(_toTimestamp "$nowDateTime" "%Y-%m-%d %H:%M:%S")
+
   sinceLastPush=$(_fromTimestamp $((now-prev)) "%H:%M:%S")
   sinceFirstPush=$(_fromTimestamp $((now-first)) "%H:%M:%S")
   echo -e "Now\t\t\t$sinceLastPush\t$sinceFirstPush"
