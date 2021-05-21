@@ -46,11 +46,11 @@ Cat log file
 
 	git clone --depth 1 https://github.com/fredrik01/ts.git ~/.ts
 
-Add this to your `.zshrc` or `.bashrc`
+Add this to `.zshrc`
 
-	PATH+=~/.ts
+	[ -f ~/.ts/ts.zsh ] && source ~/.ts/ts.zsh
 
-For Termux skip the path thing and do this instead
+For Termux skip the thing above and do this instead
 
 	ln -s $HOME/.ts/ts $PREFIX/bin/ts
 
