@@ -1,0 +1,4 @@
+# Setup ts
+if [[ ! "$PATH" == *~/.ts* ]]; then
+  export PATH="${PATH:+${PATH}:}~/.ts"
+fi
