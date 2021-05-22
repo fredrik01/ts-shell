@@ -31,7 +31,7 @@ function _toTimestamp {
   fi
 }
 
-function _logFile {
+function _timestampFile {
   suffix=${1:-default}
   if [ "$suffix" != '' ]; then
     suffix="-$suffix"
@@ -52,14 +52,14 @@ function _timestampFiles {
 # Save timestamp
 function save {
   time=$(date +"%Y-%m-%d %H:%M:%S")
-  echo "$time" >> "$(_logFile "$1")"
+  echo "$time" >> "$(_timestampFile "$1")"
   echo "Timestamp saved"
   echo "$time"
 }
 
 # Show timestamps for a stopwatch
 function show {
-  logFile="$(_logFile "$1")"
+  logFile="$(_timestampFile "$1")"
   if [ ! -f "$logFile" ]; then
     echo "No timestamps found"
     exit 0
@@ -101,7 +101,7 @@ function show {
 
 # Delete timestamp file
 function reset {
-  logFile="$(_logFile "$1")"
+  logFile="$(_timestampFile "$1")"
   read -p "Reset timer? " -n 1 -r
   echo # Move to a new line
   if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -122,7 +122,7 @@ function list {
 
 # Just cat the log file
 function raw {
-  cat "$(_logFile "$1")"
+  cat "$(_timestampFile "$1")"
 }
 
 function _help {
