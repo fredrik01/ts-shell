@@ -39,6 +39,14 @@ function _logFile {
   echo "$HOME/.ts/.timestamps$suffix"
 }
 
+function _timestampFiles {
+  for n in "$HOME"/.ts/.timestamps-*; do
+    path=$(printf '%s\n' "$n")
+    # Get part after ".timestamps-"
+    sed -e 's#.*timestamps-\(\)#\1#' <<< "$path"
+  done
+}
+
 # --------------------------------------------------------------
 
 # Save timestamp
@@ -108,11 +116,8 @@ function reset {
 
 # List stopwatches
 function list {
-  for n in "$HOME"/.ts/.timestamps-*; do
-    path=$(printf '%s\n' "$n")
-    # Get part after ".timestamps-"
-    sed -e 's#.*timestamps-\(\)#\1#' <<< "$path"
-  done
+  # Filter out * that _timestampFiles returns when there are no timestamp files
+  _timestampFiles | grep -vw "*"
 }
 
 # Just cat the log file
