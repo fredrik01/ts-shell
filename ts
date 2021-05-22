@@ -42,7 +42,7 @@ function _logFile {
 # --------------------------------------------------------------
 
 # Save timestamp
-function push {
+function save {
   time=$(date +"%Y-%m-%d %H:%M:%S")
   echo "$time" >> "$(_logFile "$1")"
   echo "Timestamp saved"
@@ -86,9 +86,9 @@ function show {
   nowDateTime=$(date +"%Y-%m-%d %H:%M:%S")
   now=$(_toTimestamp "$nowDateTime" "%Y-%m-%d %H:%M:%S")
 
-  sinceLastPush=$(_fromTimestamp $((now-prev)) "%H:%M:%S")
-  sinceFirstPush=$(_fromTimestamp $((now-first)) "%H:%M:%S")
-  echo -e "Now\t\t\t$sinceLastPush\t$sinceFirstPush"
+  sinceLastSave=$(_fromTimestamp $((now-prev)) "%H:%M:%S")
+  sinceFirstSave=$(_fromTimestamp $((now-first)) "%H:%M:%S")
+  echo -e "Now\t\t\t$sinceLastSave\t$sinceFirstSave"
 }
 
 # Delete timestamp file
@@ -121,7 +121,7 @@ function raw {
 }
 
 function _help {
-  printf "%s <task> [args]\n\nCommands:\n" "${0}"
+  printf "%s [command]\n\nCommands:\n" "${0}"
   compgen -A function | grep -v "^_" | cat -n
 }
 

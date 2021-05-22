@@ -1,6 +1,6 @@
 # timestamp-stopwatch
 
-Push timestamps to lists (stopwatches). Show time between each timestamp and time between each timestamp and the first one.
+Save timestamps to lists (stopwatches). Show time between each timestamp and time between each timestamp and the first one.
 
 Made to keep track of:
 - How long it takes before my baby falls asleep during walks
@@ -11,8 +11,8 @@ Made to keep track of:
 
 Add timestamp to default or named stopwatch
 
-	ts push
-	ts push baby
+	ts save
+	ts save baby
 
 Show timestamps and time between them
 
