@@ -126,7 +126,7 @@ function raw {
 }
 
 function _help {
-  printf "%s [command]\n\nCommands:\n" "${0}"
+  printf "ts [command]\n\nCommands:\n" "${0}"
   compgen -A function | grep -v "^_" | cat -n
 }
 
