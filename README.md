@@ -46,7 +46,7 @@ Cat log file
 
 ## Installation
 
-	git clone --depth 1 https://github.com/fredrik01/ts.git ~/.ts
+	git clone --depth 1 https://github.com/fredrik01/ts-shell.git ~/.ts
 
 Add this to `.zshrc`
 
