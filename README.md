@@ -1,6 +1,6 @@
 # timestamp-stopwatch
 
-There is also a version written in Go: https://github.com/fredrik01/ts-go.git
+There is also a version written in Go: https://github.com/fredrik01/ts.git
 
 Save timestamps to lists (stopwatches). Show time between each timestamp and time between each timestamp and the first one.
 
